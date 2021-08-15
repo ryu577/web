@@ -1,147 +1,38 @@
+<!doctype html>
 <html>
-
 <head>
-  <title>Timeline | navigation menu</title>
-  <!-- note: moment.js must be loaded before vis.js, else vis.js uses its embedded version of moment.js -->
-  <style>
-      body,
-      html,
-      input {
-        font-family: sans-serif;
-        font-size: 12pt;
-      }
-
-      #visualization {
-        position: relative;
-      }
-
-      .menu {
-        position: absolute;
-        display: table-cell;
-        vertical-align: middle;
-        top: -5px;
-        right: 0;
-        margin: 10px;
-        z-index: 9999;
-      }
-
-      label,
-      input {
-        vertical-align: middle;
-        padding: 0px;
-        margin: 0px;
-        height: 20px;
-      }
+  <title>Timeline</title>
+  <script type="text/javascript" src="https://unpkg.com/vis-timeline@latest/standalone/umd/vis-timeline-graph2d.min.js"></script>
+  <link href="https://unpkg.com/vis-timeline@latest/styles/vis-timeline-graph2d.min.css" rel="stylesheet" type="text/css" />
+  <style type="text/css">
+    #visualization {
+      width: 600px;
+      height: 400px;
+      border: 1px solid lightgray;
+    }
   </style>
 </head>
 <body>
-  <p>
-    Simple working track created from vis.js examples
-    <a href="http://visjs.org/examples/timeline/interaction/navigationMenu.html">Timeline | navigation menu</a> , have to be adapted and optimized according to your needs.<br>
-    <b>For each zoom level using the "slider", better use keyboard after clicking on its cursor!</b>
-  </p>
-  <div id="visualization">
-    <div class="menu">
-      <span>out </span>
-      <input id="sliderZoom" type="range" class="range" name="a" min="-1" max="1" step="0.1" value="0" title="Better use keyboard to each level zoom!" />
-      <span> in </span>
-      <input type="button" id="fit" value=" &#8635; " title="reset" />
-      <input type="button" id="moveLeft" value="Move left" title="Move left" />
-      <input type="button" id="moveRight" value="Move right" title="Move right" />
-    </div>
-  </div>
-  <script>
-    // create a timeline with some data
-var container = document.getElementById("visualization");
-var items = new vis.DataSet([
-  {
-    id: 1,
-    content: "item 1",
-    start: "2017-04-20"
-  },
-  {
-    id: 2,
-    content: "item 2",
-    start: "2017-04-14"
-  },
-  {
-    id: 3,
-    content: "item 3",
-    start: "2017-04-1",
-    type: "point"
-  },
-  {
-    id: 4,
-    content: "item 4",
-    start: "2017-04-23",
-    end: "2017-04-27"
-  },
-  {
-    id: 5,
-    content: "item 5",
-    start: "2017-04-22",
-    end: "2017-04-23"
-  }
-]);
-var options = {
-  //stack: false,
-  orientation: {
-    axis: "top",
-    item: "top"
-  },
-  //zoomMax: 31536000000, // just one year
-  zoomMax: 315360000000000, // 10,000 years is maximum possible
-  zoomMin: 10 // 10ms
-};
-var timeline = new vis.Timeline(container, items, options);
+<div id="visualization"></div>
+<script type="text/javascript">
+  // DOM element where the Timeline will be attached
+  var container = document.getElementById('visualization');
 
-/**
-     * Move the timeline a given percentage to left or right
-     * @param {Number} percentage   For example 0.1 (left) or -0.1 (right)
-     */
-function move(percentage) {
-  var range = timeline.getWindow();
-  var interval = range.end - range.start;
-  timeline.setWindow({
-    start: range.start.valueOf() - interval * percentage,
-    end: range.end.valueOf() - interval * percentage
-  });
-}
+  // Create a DataSet (allows two way data-binding)
+  var items = new vis.DataSet([
+    {id: 1, content: 'item 1', start: '2014-04-20'},
+    {id: 2, content: 'item 2', start: '2014-04-14'},
+    {id: 3, content: 'item 3', start: '2014-04-18'},
+    {id: 4, content: 'item 4', start: '2014-04-16', end: '2014-04-19'},
+    {id: 5, content: 'item 5', start: '2014-04-25'},
+    {id: 6, content: 'item 6', start: '2014-04-27', type: 'point'}
+  ]);
 
-// attach events to the navigation buttons
-document.getElementById("moveLeft").onclick = function() {
-  move(0.2);
-};
-document.getElementById("moveRight").onclick = function() {
-  move(-0.2);
-};
+  // Configuration for the Timeline
+  var options = {};
 
-// Using slider to zoomIn or zoomOut
-document.getElementById("sliderZoom").addEventListener("input", function(e) {
-  var value = this.value;
-  if (value < 0) {
-    var start = moment().year(moment().year() - 100000), // to adjust with options
-      end = moment().year(moment().year() + 1);
-    timeline.zoomOut(-value);
-    if (value === "-1") timeline.setWindow(start, end);
-  } else if (value > 0) {
-    var start = moment(), end = moment(moment().utc() + 10);
-    timeline.zoomIn(value);
-    if (value === "1") timeline.setWindow(start, end);
-  } else {
-    timeline.fit(items.getIds());
-    this.value = 0;
-  }
-});
-
-// To reset zoom initial state
-document.getElementById("fit").onclick = function() {
-  //$('.range').next().text('0'); // set default if to use output with input range
-  document.getElementById("sliderZoom").value = 0;
-  timeline.fit(items.getIds());
-};
-
-  </script>
-  </body>
-
+  // Create a Timeline
+  var timeline = new vis.Timeline(container, items, options);
+</script>
+</body>
 </html>
