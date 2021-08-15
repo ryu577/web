@@ -1,1 +1,25 @@
+<html>
 
+<head>
+  <title>Timeline | navigation menu</title>
+  <!-- note: moment.js must be loaded before vis.js, else vis.js uses its embedded version of moment.js -->
+</head>
+<body>
+  <p>
+    Simple working track created from vis.js examples
+    <a href="http://visjs.org/examples/timeline/interaction/navigationMenu.html">Timeline | navigation menu</a> , have to be adapted and optimized according to your needs.<br>
+    <b>For each zoom level using the "slider", better use keyboard after clicking on its cursor!</b>
+  </p>
+  <div id="visualization">
+    <div class="menu">
+      <span>out </span>
+      <input id="sliderZoom" type="range" class="range" name="a" min="-1" max="1" step="0.1" value="0" title="Better use keyboard to each level zoom!" />
+      <span> in </span>
+      <input type="button" id="fit" value=" &#8635; " title="reset" />
+      <input type="button" id="moveLeft" value="Move left" title="Move left" />
+      <input type="button" id="moveRight" value="Move right" title="Move right" />
+    </div>
+  </div>
+</body>
+</body>
+</html>
