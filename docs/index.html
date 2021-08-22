@@ -1,26 +1,126 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-  <head>
-    <title>My work</title>
-    <meta name="description" content="Rohit's websites landing page.">
-    <meta name="keywords" content="Rohit's projects">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+    ul, #the_tree {
+      list-style-type: none;
+    }
+
+    #the_tree {
+      margin: 0;
+      padding: 0;
+    }
+
+    .caret {
+      cursor: pointer;
+      -webkit-user-select: none; /* Safari 3.1+ */
+      -moz-user-select: none; /* Firefox 2+ */
+      -ms-user-select: none; /* IE 10+ */
+      user-select: none;
+    }
+
+    .caret::before {
+      content: "\25B6";
+      color: black;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .caret-down::before {
+      -ms-transform: rotate(90deg); /* IE 9 */
+      -webkit-transform: rotate(90deg); /* Safari */'
+      transform: rotate(90deg);  
+    }
+
+    .nested {
+      display: none;
+    }
+
+    .active {
+      display: block;
+    }
+    </style>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="tree_view.css">
-  </head>
-  <body>
-    <div class="topnav">
-      <a class="active" href="#home">Home</a>
-      <a href="#news">News</a>
-      <a href="#contact">Contact</a>
-      <a href="#about">About</a>
-    </div>
-    <h1>Optimization</h1>
-    Concept of <a href="https://ryu577.github.io/jekyll/update/2017/09/29/gradient_max_ascent.html">gradient</a>.
-    <h1>Probability</h1>
-    Check out the blog <a href="https://medium.com/@rohitpandey576/coin-toss-markov-chains-7995cb303406">here</a>.
-    Also, see extensive list <a href="probability.html">here</a>
-    <h1>Solid geometry</h1>
-    <a href="https://youtu.be/KuXnrg1YpiY">Video</a> on Binomial coefficients on hyper-cubes.
-    
-  </body>
+</head>
+<body>
+  <div class="topnav">
+    <a href="index.html">Tree of knowledge</a>
+    <a href="chronos.html">Chronos</a>
+  </div>
+  <h2>The tree of knowledge springs eternal.</h2>
+  <p>A central place for catalogueing all my contributions.</p>
+
+  <ul id="the_tree">    
+        <li><span class="caret">Applied Math</span>
+          <ul class="nested">
+              <li><span class="caret">Probability & Counting</span>
+                <ul class="nested">
+                  <li><a href="https://medium.com/@rohitpandey576/coin-toss-markov-chains-7995cb303406">Coin toss markov chains</a> & <a href="https://ryu577.github.io/jekyll/update/2018/10/08/competitive_coin_tossing.html">Mathy version.</a></li>
+                  <li><a href="https://www.cantorsparadise.com/walking-on-a-grid-4316d46712f?gi=6b56c865f43f">Walking on a grid.</a></li>
+                  <li><a href="https://arxiv.org/pdf/2003.04720.pdf">Mean and variance in coupons collected</a></li>
+                  <li><a href="https://arxiv.org/pdf/2108.00535.pdf">The simplest proof of Blackwell's renewal theorem</a></li>
+                  <li><span class="caret">Statistics</span>
+                    <ul class="nested">
+                      <li><a href="https://arxiv.org/pdf/2001.04045.pdf">Breaking hypothesis testing for failure rates</a></li>
+                      <li><a href="https://towardsdatascience.com/hypothesis-testing-visualized-6f30b18fc78f">Hypothesis testing visualized</a></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li><span class="caret">Algebra</span>
+                <ul class="nested">
+                  <li><a href="https://ryu577.github.io/jekyll/update/2017/01/23/buchbergers_algo_groebner_basis.html">Solving systems of polynomial equations.</a></li>
+                </ul>
+              </li>
+              <li><span class="caret">Solid geometry</span>
+                <ul class="nested">
+                  <li>vid:<a href="https://www.youtube.com/watch?v=KuXnrg1YpiY&t=5s">Binomial coefficients on hypercubes</a></li>
+                  <li>vid:<a href="https://www.youtube.com/watch?v=57g6nQGBFcY">Slicing a Teserract</a></li>
+                  <li>TODO: Equiangular lines in d-dimensions.</li>
+                </ul>
+              </li>
+              <li><span class="caret">Optimization</span>
+                <ul class="nested">
+                  <li><a href="https://towardsdatascience.com/lagrange-multipliers-with-pictures-and-code-ace8018dac5e">Lagrange multipliers</a></a></li>
+                </ul>
+              </li>
+              <li><span class="caret">Physics</span>
+                <ul class="nested">
+                  <li><a href="https://physics.stackexchange.com/questions/361620/is-my-argument-deducing-from-maxwells-equations-the-exclusion-of-faster-than-lig">Nothing can go faster than light from Maxwell's eqns.</a></a></li>
+                </ul>
+              </li>
+            </ul>
+        </li>
+        <li><span class="caret">CS and algorithms</span>
+          <ul class="nested">
+            <li>Graphs</li>
+            <li><span class="caret">Combinatorial objects</span>
+            <ul class="nested">
+              <li><a href="https://cs.stackexchange.com/questions/136923/why-does-my-code-work-bijecting-binary-trees-to-dyck-paths">Bijecting Dyck paths to binary search trees</a></li>
+            </ul>
+          </li>
+          </ul>
+        </li>
+        <li><span class="caret">Futurism</span>
+          <ul class="nested">
+            <li>TODO: The simulation hypothesis</li>
+            <li>TODO: Threats</li>
+          </ul>
+        </li> 
+  </ul>
+
+<script>
+var toggler = document.getElementsByClassName("caret");
+var i;
+
+for (i = 0; i < toggler.length; i++) {
+  toggler[i].addEventListener("click", function() {
+    this.parentElement.querySelector(".nested").classList.toggle("active");
+    this.classList.toggle("caret-down");
+  });
+}
+</script>
+
+</body>
 </html>
